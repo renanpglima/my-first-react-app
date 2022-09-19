@@ -1,1 +1,1 @@
-# my-first-react-app
+# React Studies
