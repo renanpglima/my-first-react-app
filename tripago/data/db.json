@@ -1,0 +1,28 @@
+{
+    "trips":[
+        {
+            "title":"Carpina 1 noite",
+            "price":"R$50",
+            "id":"1",
+            "reg":"Nordeste"
+        },
+        {
+            "title":"Maceió 5 dias",
+            "price":"R$2000",
+            "id":"2",
+            "reg":"Nordeste"
+        },
+        {
+            "title":"São Paulo 4 noites",
+            "price":"R$800",
+            "id":"3",
+            "reg":"Sudeste"
+        },
+        {
+            "title":"Rio de Janeiro 1 noite",
+            "price":"R$1000",
+            "id":"4",
+            "reg":"Sudeste"
+        }
+    ]
+}
