@@ -1,27 +1,35 @@
 import './App.css';
 import {useEffect, useState} from 'react';
 import SingleCard from './components/SingleCard';
+import React from 'react';
+import { useCallback } from 'react';
 
-const cardImages = [
-  {'src': "/img/helmet-1.png", matched: false},
-  {"src": "/img/potion-1.png", matched: false},
-  {"src": "/img/ring-1.png", matched: false},
-  {"src": "/img/scroll-1.png", matched: false},
-  {"src": "/img/shield-1.png", matched: false},
-  {"src": "/img/sword-1.png", matched: false}
+export interface Card {
+  id:number,
+  src: string;
+  matched: boolean;
+}
+
+const cardImages:Card[] = [
+  {id: 0, 'src': "/img/helmet-1.png", matched: false},
+  {id: 0, "src": "/img/potion-1.png", matched: false},
+  {id: 0, "src": "/img/ring-1.png", matched: false},
+  {id: 0, "src": "/img/scroll-1.png", matched: false},
+  {id: 0, "src": "/img/shield-1.png", matched: false},
+  {id: 0, "src": "/img/sword-1.png", matched: false}
 ]
 
-function App() {
+const App = () => {
 
-  const [cards, setCards] = useState([])
-  const [turns, setTurns] = useState(0)
-  const [choiceOne, setChoiceOne] = useState(null)
-  const [choiceTwo, setChoiceTwo] = useState(null)
-  const [disabled, setDisabled] = useState(false)
+  const [cards, setCards] = useState<Card[]>([])
+  const [turns, setTurns] = useState<number>(0)
+  const [choiceOne, setChoiceOne] = useState<Card | null>(null)
+  const [choiceTwo, setChoiceTwo] = useState<Card | null>(null)
+  const [disabled, setDisabled] = useState<boolean>(false)
 
 
-  const shuffleCards = () => {
-    const shuffledCards =  [...cardImages, ...cardImages]
+  const shuffleCards = () : void => {
+    const shuffledCards:Card[] =  [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({...card, id: Math.random()}))
     setCards(shuffledCards)
@@ -29,16 +37,16 @@ function App() {
     setTurns(0)
   }
 
-  const handleChoice = (card) => {
+  const handleChoice = (card:Card) : void => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
-  const resetCards = () => {
+  const resetCards = useCallback(() : void => {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(turns+1)
     setDisabled(false)
-  }
+  }, [turns])
 
   useEffect(() => {
 
@@ -52,9 +60,7 @@ function App() {
       
       setTimeout (() => resetCards() , 1000)
     } 
-  }, [choiceTwo, choiceOne])
-
-  
+  }, [choiceTwo, choiceOne, resetCards])
 
   return (
     <div className="App">
@@ -78,6 +84,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

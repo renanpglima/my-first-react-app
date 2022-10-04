@@ -1,6 +1,15 @@
+import React from 'react'
 import './SingleCard.css'
+import {Card} from '../App'
 
-export default function SingleCard({ card , handleChoice, flipped, disabled}) {
+interface Props {
+  card: Card;
+  handleChoice: Function;
+  flipped: boolean;
+  disabled:boolean;
+}
+
+export default function SingleCard({ card , handleChoice, flipped, disabled}:Props) : JSX.Element{
 
   const handleClick = () => {
     if (!disabled) handleChoice(card)
